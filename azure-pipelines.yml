@@ -1,0 +1,23 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.12'
+    displayName: 'Install Python'
+
+  - script: |
+      python -m pip install --upgrade pip
+      python -m unittest discover -v
+    displayName: 'Run Python unit tests'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.SourcesDirectory)'
+      artifact: 'DevOps-Project-Files'
+      publishLocation: 'pipeline'
+    displayName: 'Publish project artifact'
