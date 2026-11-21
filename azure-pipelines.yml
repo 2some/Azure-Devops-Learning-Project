@@ -15,12 +15,13 @@ steps:
       python -m unittest discover -v
     displayName: 'Run Python unit tests'
 
+  - script: |
+      docker build -t devops-learning-app:$(Build.BuildId) .
+    displayName: 'Build Docker image'
+
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.SourcesDirectory)'
       artifact: 'DevOps-Project-Files'
       publishLocation: 'pipeline'
     displayName: 'Publish project artifact'
-- script: |
-      docker build -t devops-learning-app:$(Build.BuildId) .
-    displayName: 'Build Docker image'
