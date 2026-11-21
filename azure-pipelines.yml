@@ -21,3 +21,6 @@ steps:
       artifact: 'DevOps-Project-Files'
       publishLocation: 'pipeline'
     displayName: 'Publish project artifact'
+- script: |
+      docker build -t devops-learning-app:$(Build.BuildId) .
+    displayName: 'Build Docker image'
